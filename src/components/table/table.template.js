@@ -22,8 +22,8 @@ function createRow(row, content = '') {
 `;
 }
 
-function createCell(col) {
-  return `<div class="cell" data-col="${col}" contenteditable></div>`;
+function createCell(row, col) {
+  return `<div class="cell" data-row="${row}" data-col="${col}" data-id="${row}:${col}" data-type="cell" contenteditable></div>`;
 }
 
 export function createTable(rowsCount = 100) {
@@ -40,7 +40,7 @@ export function createTable(rowsCount = 100) {
     else {
       const cells = [];
       for (let j = 1; j < colsCount; j++) {
-        cells.push(createCell(j));
+        cells.push(createCell(i, j));
       }
       rows.push(createRow(i, cells.join('')));
     }
