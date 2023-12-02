@@ -1,20 +1,26 @@
 import { ExcelComponent } from '@core/ExcelComponent';
+import { createHeader } from './header.template';
+import * as actions from '@/state/actions';
 
 export class Header extends ExcelComponent {
   static className = 'excel__header';
   constructor($root, options) {
-    super($root, { name: 'Header', ...options });
+    super($root, {
+      name: 'Header',
+      listeners: ['input'],
+      subscribe: ['titleState'],
+      ...options,
+    });
   }
   toHTML() {
-    return `
-    <input type="text" class="input" value="New table" />
-    <div>
-      <div class="button">
-        <i class="material-icons">delete</i>
-      </div>
-      <div class="button">
-        <i class="material-icons">exit_to_app</i>
-      </div>
-    </div>`;
+    return createHeader(this.store.getState());
+  }
+
+  storeChanged({ titleState }) {
+    console.log(titleState);
+  }
+
+  onInput(event) {
+    this.$dispatch(actions.changeTitle(event.target.value));
   }
 }
