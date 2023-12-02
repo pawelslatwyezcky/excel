@@ -37,7 +37,6 @@ function createCell(row, col, state) {
     ...defaultStyles,
     ...state.stylesState[`${row}:${col}`],
   });
-  console.log(content);
   return `<div class="cell" data-row="${row}" data-col="${col}" data-id="${row}:${col}" style="${styles}; width:${width}" data-type="cell" data-value="${content}" contenteditable>${parse(
     content
   )}</div>`;
