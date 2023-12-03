@@ -9,25 +9,8 @@ const dev = !prod;
 const filename = (ext) => (dev ? `bundle.${ext}` : `bundle.[hash].${ext}`);
 
 const loaders = () => {
-  if (dev)
-    return [
-      {
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env'],
-        },
-      },
-      'eslint-loader',
-    ];
-  return [
-    {
-      loader: 'babel-loader',
-      options: {
-        presets: ['@babel/preset-env'],
-        plugins: ['@babel/plugin-proposal-class-properties'],
-      },
-    },
-  ];
+  if (dev) return ['babel-loader', 'eslint-loader'];
+  return ['babel-loader'];
 };
 
 module.exports = {
